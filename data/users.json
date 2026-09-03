@@ -1,0 +1,14 @@
+[
+  {
+    "id": "user_1788419711274",
+    "name": "Demo User",
+    "email": "demo-639240165112385799@example.com",
+    "createdAt": "2026-09-03T07:15:11.275Z"
+  },
+  {
+    "id": "user_1788419733183",
+    "name": "Anuj Shriva",
+    "email": "learner@example.com",
+    "createdAt": "2026-09-03T07:15:33.183Z"
+  }
+]

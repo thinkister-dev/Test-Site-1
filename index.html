@@ -54,6 +54,19 @@
           <aside class="state-panel"><div class="state-heading"><span class="kicker">STATE MONITOR</span><span class="state-live">LIVE</span></div><div class="state-row"><span>Element</span><strong id="state-element">preview-card</strong></div><div class="state-row"><span>Class</span><strong id="state-class">default</strong></div><div class="state-row"><span>Events</span><strong id="state-events">0</strong></div><div class="state-row"><span>Theme</span><strong id="state-theme">daylight</strong></div><div class="state-row database-row"><span>Database</span><strong id="state-database">0 saved</strong></div><p class="state-note">JavaScript changes state. CSS sees the new class and redraws the same HTML. The backend saves each action for the next page load.</p><button class="reset-button" id="reset-button" type="button">Reset playground <span>↺</span></button></aside>
         </div>
       </section>
+
+      <section class="signup-section container" id="signup">
+        <div class="section-heading compact"><p class="kicker">03 / DATABASE WRITE</p><h2>Save a real user.</h2><p>Submit this form to send JSON to Node.js. The server validates it, saves it to a file database, and returns the new record immediately.</p></div>
+        <div class="signup-layout">
+          <form class="signup-form" id="signup-form">
+            <label for="user-name">Name</label><input id="user-name" name="name" type="text" autocomplete="name" placeholder="e.g. Anuj Shrivastava" required minlength="2" maxlength="80" />
+            <label for="user-email">Email</label><input id="user-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="120" />
+            <button class="submit-button" type="submit">Save user <span>↗</span></button>
+            <p class="form-status" id="form-status" role="status">Waiting for a submission...</p>
+          </form>
+          <div class="user-result"><div class="result-top"><span class="kicker">DATABASE RESPONSE</span><span class="state-live" id="user-count">0 USERS</span></div><div class="saved-user" id="saved-user"><span class="user-avatar">?</span><div><strong>No users saved yet</strong><p>Your submitted profile will appear here.</p></div></div><div class="data-flow"><span>FORM</span><b>→</b><span>API</span><b>→</b><span>USERS.JSON</span></div></div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer container"><span>WEB STACK LAB / 2026</span><span>Structure + expression + behavior</span>

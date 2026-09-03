@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	const stateClass = document.querySelector("#state-class");
 	const stateTheme = document.querySelector("#state-theme");
 	const stateDatabase = document.querySelector("#state-database");
+	const signupForm = document.querySelector("#signup-form");
+	const formStatus = document.querySelector("#form-status");
+	const userCount = document.querySelector("#user-count");
+	const savedUser = document.querySelector("#saved-user");
 	const backendStatus = document.querySelector("#backend-status");
 	const previewTitle = document.querySelector("#preview-title");
 	const previewCopy = document.querySelector("#preview-copy");
@@ -42,6 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
 		} catch (error) {
 			stateDatabase.textContent = "unavailable";
 		}
+	}
+
+	async function loadUsers() {
+		if (!apiAvailable) return;
+		try {
+			const response = await fetch("/api/users");
+			if (!response.ok) throw new Error("Users request failed");
+			const data = await response.json();
+			userCount.textContent = `${data.total} USERS`;
+			stateDatabase.textContent = `${data.total} users`;
+			if (data.latest) renderSavedUser(data.latest);
+		} catch (error) {
+			userCount.textContent = "UNAVAILABLE";
+		}
+	}
+
+	function renderSavedUser(user) {
+		savedUser.innerHTML = `<span class="user-avatar">${user.name.charAt(0).toUpperCase()}</span><div><strong>${user.name}</strong><p>${user.email} · saved ${new Date(user.createdAt).toLocaleTimeString([], { hour12: false })}</p></div>`;
 	}
 
 	async function checkBackend() {
@@ -97,6 +119,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		sendEvent("playground-reset", message);
 	});
 
+	signupForm.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		const formData = new FormData(signupForm);
+		const user = { name: formData.get("name"), email: formData.get("email") };
+		formStatus.textContent = "Sending user to the backend...";
+		formStatus.className = "form-status pending";
+		try {
+			const response = await fetch("/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(user) });
+			const result = await response.json();
+			if (!response.ok) throw new Error(result.error || "Could not save user");
+			formStatus.textContent = `Saved ${result.user.name} to users.json`;
+			formStatus.className = "form-status success";
+			renderSavedUser(result.user);
+			signupForm.reset();
+			loadUsers();
+		} catch (error) {
+			formStatus.textContent = error.message;
+			formStatus.className = "form-status error";
+		}
+	});
+
 	checkBackend();
 	loadDatabaseSummary();
+	loadUsers();
 });
