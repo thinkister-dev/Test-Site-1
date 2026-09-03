@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const stateEvents = document.querySelector("#state-events");
 	const stateClass = document.querySelector("#state-class");
 	const stateTheme = document.querySelector("#state-theme");
+	const stateDatabase = document.querySelector("#state-database");
 	const backendStatus = document.querySelector("#backend-status");
 	const previewTitle = document.querySelector("#preview-title");
 	const previewCopy = document.querySelector("#preview-copy");
@@ -24,9 +25,22 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (!response.ok) throw new Error("Event request failed");
 			backendStatus.innerHTML = "<i></i> API CONNECTED";
 			backendStatus.classList.add("connected");
+			loadDatabaseSummary();
 		} catch (error) {
 			backendStatus.innerHTML = "<i></i> API OFFLINE";
 			backendStatus.classList.remove("connected");
+		}
+	}
+
+	async function loadDatabaseSummary() {
+		if (!apiAvailable) return;
+		try {
+			const response = await fetch("/api/events");
+			if (!response.ok) throw new Error("Database request failed");
+			const data = await response.json();
+			stateDatabase.textContent = `${data.total} saved`;
+		} catch (error) {
+			stateDatabase.textContent = "unavailable";
 		}
 	}
 
@@ -84,4 +98,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 
 	checkBackend();
+	loadDatabaseSummary();
 });

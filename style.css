@@ -74,3 +74,4 @@ body.night { --ink: #eff1e9; --muted: #a3b2b0; --paper: #17262d; --line: #40545a
 .backend-status { color: #e59b72; }
 .backend-status i { display: inline-block; width: 5px; height: 5px; margin-right: 4px; border-radius: 50%; background: currentColor; }
 .backend-status.connected { color: #9cc9b4; }
+.database-row strong { color: var(--coral); }

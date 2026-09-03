@@ -1,0 +1,37 @@
+[
+  {
+    "type": "database-check",
+    "message": "full stack persistence test",
+    "occurredAt": "2026-09-03T07:05:04.593Z"
+  },
+  {
+    "type": "playground-reset",
+    "message": "reset event → component returned to default",
+    "occurredAt": "2026-09-03T07:07:26.436Z"
+  },
+  {
+    "type": "playground-reset",
+    "message": "reset event → component returned to default",
+    "occurredAt": "2026-09-03T07:07:30.707Z"
+  },
+  {
+    "type": "playground-reset",
+    "message": "reset event → component returned to default",
+    "occurredAt": "2026-09-03T07:07:32.137Z"
+  },
+  {
+    "type": "playground-reset",
+    "message": "reset event → component returned to default",
+    "occurredAt": "2026-09-03T07:07:33.562Z"
+  },
+  {
+    "type": "component-toggle",
+    "message": "click event → class added → UI updated",
+    "occurredAt": "2026-09-03T07:07:37.627Z"
+  },
+  {
+    "type": "playground-reset",
+    "message": "reset event → component returned to default",
+    "occurredAt": "2026-09-03T07:07:42.638Z"
+  }
+]
