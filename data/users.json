@@ -10,5 +10,11 @@
     "name": "Anuj Shriva",
     "email": "learner@example.com",
     "createdAt": "2026-09-03T07:15:33.183Z"
+  },
+  {
+    "id": "user_1788436650434",
+    "name": "test firebase",
+    "email": "firebase@gmail.com",
+    "createdAt": "2026-09-03T11:57:30.435Z"
   }
 ]

@@ -64,13 +64,16 @@
             <button class="submit-button" type="submit">Save user <span>↗</span></button>
             <p class="form-status" id="form-status" role="status">Waiting for a submission...</p>
           </form>
-          <div class="user-result"><div class="result-top"><span class="kicker">DATABASE RESPONSE</span><span class="state-live" id="user-count">0 USERS</span></div><div class="saved-user" id="saved-user"><span class="user-avatar">?</span><div><strong>No users saved yet</strong><p>Your submitted profile will appear here.</p></div></div><div class="data-flow"><span>FORM</span><b>→</b><span>API</span><b>→</b><span>USERS.JSON</span></div></div>
+          <div class="user-result"><div class="result-top"><span class="kicker">DATABASE RESPONSE</span><span class="state-live" id="user-count">0 USERS</span></div><div class="saved-user" id="saved-user"><span class="user-avatar">?</span><div><strong>No users saved yet</strong><p>Your submitted profile will appear here.</p></div></div><div class="data-flow"><span>FORM</span><b>→</b><span>LOCAL</span><b>+</b><span>FIREBASE</span></div></div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer container"><span>WEB STACK LAB / 2026</span><span>Structure + expression + behavior</span>
     </footer>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

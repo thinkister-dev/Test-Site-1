@@ -19,8 +19,44 @@ document.addEventListener("DOMContentLoaded", () => {
 	const backendStatus = document.querySelector("#backend-status");
 	const previewTitle = document.querySelector("#preview-title");
 	const previewCopy = document.querySelector("#preview-copy");
+	const localUsersKey = "web-stack-lab-users";
 	let events = 0;
 	const apiAvailable = window.location.protocol === "http:" || window.location.protocol === "https:";
+	let firebaseDatabase = null;
+
+	function setupFirebase() {
+		const config = window.firebaseConfig || {};
+		if (!window.firebase || !config.apiKey || !config.databaseURL) return;
+		try {
+			const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(config);
+			firebaseDatabase = app.database();
+			backendStatus.innerHTML = "<i></i> FIREBASE READY";
+			backendStatus.classList.add("connected");
+		} catch (error) {
+			firebaseDatabase = null;
+		}
+	}
+
+	function readLocalUsers() {
+		try {
+			const users = JSON.parse(localStorage.getItem(localUsersKey) || "[]");
+			return Array.isArray(users) ? users : [];
+		} catch (error) {
+			return [];
+		}
+	}
+
+	function saveLocalUser(user) {
+		const users = readLocalUsers().filter((savedUser) => savedUser.email !== user.email);
+		users.push(user);
+		localStorage.setItem(localUsersKey, JSON.stringify(users));
+	}
+
+	async function saveFirebaseUser(user) {
+		if (!firebaseDatabase) return false;
+		await firebaseDatabase.ref(`users/${user.id}`).set(user);
+		return true;
+	}
 
 	async function sendEvent(type, message) {
 		if (!apiAvailable) return;
@@ -49,6 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	async function loadUsers() {
+		const localUsers = readLocalUsers();
+		if (localUsers.length) {
+			userCount.textContent = `${localUsers.length} USERS`;
+			renderSavedUser(localUsers.at(-1));
+		}
 		if (!apiAvailable) return;
 		try {
 			const response = await fetch("/api/users");
@@ -125,13 +166,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		const user = { name: formData.get("name"), email: formData.get("email") };
 		formStatus.textContent = "Sending user to the backend...";
 		formStatus.className = "form-status pending";
+		let savedUser;
 		try {
+			if (!apiAvailable) throw new Error("Local mode");
 			const response = await fetch("/api/users", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(user) });
 			const result = await response.json();
 			if (!response.ok) throw new Error(result.error || "Could not save user");
-			formStatus.textContent = `Saved ${result.user.name} to users.json`;
+			savedUser = result.user;
+		} catch (error) {
+			if (error.message === "That email is already saved") throw error;
+			savedUser = { id: `local_${Date.now()}`, ...user, createdAt: new Date().toISOString() };
+		}
+		try {
+			saveLocalUser(savedUser);
+			let firebaseSaved = false;
+			try {
+				firebaseSaved = await saveFirebaseUser(savedUser);
+			} catch (firebaseError) {
+				firebaseSaved = false;
+			}
+			formStatus.textContent = firebaseSaved ? `Saved ${savedUser.name} locally and to Firebase` : `Saved ${savedUser.name} locally`;
 			formStatus.className = "form-status success";
-			renderSavedUser(result.user);
+			renderSavedUser(savedUser);
 			signupForm.reset();
 			loadUsers();
 		} catch (error) {
@@ -140,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
+	setupFirebase();
 	checkBackend();
 	loadDatabaseSummary();
 	loadUsers();
