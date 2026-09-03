@@ -3,66 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#08131f" />
-    <title>Neon Apex | Street Sprint</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
   </head>
   <body>
-    <main class="game-shell">
-      <section class="intro-bar" aria-label="Game introduction">
-        <div>
-          <p class="eyebrow">NEON APEX / STREET SPRINT</p>
-          <h1>Own the <span>night shift.</span></h1>
-        </div>
-        <div class="best-score"><span>BEST RUN</span><strong id="best-score">000000</strong></div>
-      </section>
-
-      <section class="game-layout">
-        <div class="race-panel">
-          <div class="hud" aria-label="Race statistics">
-            <div class="hud-item"><span>Distance</span><strong><b id="distance">0000</b> m</strong></div>
-            <div class="hud-item"><span>Credits</span><strong class="credit-value"><i></i><b id="credits">000</b></strong></div>
-            <div class="hud-item"><span>Combo</span><strong id="combo">x1.0</strong></div>
-            <div class="hud-item speed-stat"><span>Velocity</span><strong><b id="speed-readout">72</b> <small>KM/H</small></strong></div>
-          </div>
-
-          <div class="track-wrap">
-            <canvas id="race-canvas" aria-label="Top-down neon road race. Use arrow keys or A and D to steer."></canvas>
-            <div class="track-message" id="track-message">
-              <p class="message-kicker">READY TO RUN?</p>
-              <h2>Find your<br /><em>line.</em></h2>
-              <p>Use A / D or the arrow keys to dodge traffic and collect credits.</p>
-              <button class="primary-button" id="start-button" type="button">Start engine <span>-></span></button>
-            </div>
-          </div>
-
-          <div class="race-footer">
-            <div class="legend"><span><i class="legend-dot credit-dot"></i> Credits</span><span><i class="legend-dot boost-dot"></i> Boost gates</span></div>
-            <button class="pause-button" id="pause-button" type="button" aria-label="Pause game">Pause <span>II</span></button>
-          </div>
-        </div>
-
-        <aside class="control-panel">
-          <div class="panel-heading"><span class="section-number">01</span><h2>Throttle</h2></div>
-          <p class="panel-copy">Set your pace. Higher velocity means bigger rewards, but traffic closes in fast.</p>
-          <label class="range-label" for="speed-control"><span>RACE PACE</span><strong id="speed-label">72 km/h</strong></label>
-          <input id="speed-control" type="range" min="45" max="120" value="72" />
-          <div class="range-scale"><span>CRUISE</span><span>REDLINE</span></div>
-
-          <div class="reward-card">
-            <div class="reward-header"><span class="trophy-mark">*</span><div><span>RUN REWARD</span><strong id="reward-total">+000</strong></div></div>
-            <div class="reward-progress"><span id="reward-progress"></span></div>
-            <p>Collect <b>10 credits</b> to unlock a bonus multiplier.</p>
-          </div>
-
-          <div class="tips"><span class="section-number">02</span><div><h3>Street intel</h3><p>Near misses charge your combo. A boost gate refills it when you need a clean getaway.</p></div></div>
-          <div class="key-row"><kbd>A</kbd><kbd>D</kbd><span>or</span><kbd>&lt;</kbd><kbd>&gt;</kbd><small>STEER</small></div>
-        </aside>
-      </section>
+    <header>
+      <h1>Welcome</h1>
+    </header>
+    <main>
+      <p>This is a basic HTML boilerplate.</p>
     </main>
-    <script src="function.js"></script>
   </body>
 </html>
