@@ -1,0 +1,9 @@
+{
+  "name": "web-stack-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive HTML, CSS, JavaScript and Node.js demonstration",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
